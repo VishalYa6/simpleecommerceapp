@@ -22,6 +22,9 @@ public class AdminService {
         return adminRepo.findById(id).orElseThrow(() -> new RuntimeException("Admin not found with id: " + id));
     }
 
+    public void createAdmin(Admin admin) {
+        adminRepo.save(admin);
+    }
     public void UpdateAdmin(Admin admin , Long id) {
         adminRepo.findById(admin.getId()).orElseThrow(() -> new RuntimeException("Admin not found with id: " + admin.getId()));
         adminRepo.save(admin);
@@ -32,13 +35,18 @@ public class AdminService {
         adminRepo.deleteById(id);
     }
 
-    private boolean verifyCredentials(String email, String password) {
+    public boolean verifyCredentials(String email, String password) {
         Admin admin = adminRepo.findByEmail(email);
         if (admin.getPassword() == password) {
             return true ;
         } else {
             return false ;
         }
+    }
+
+    public void createUser(Admin admin) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'createUser'");
     }
 
 }
